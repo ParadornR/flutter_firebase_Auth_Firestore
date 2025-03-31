@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -86,17 +87,26 @@ class _HomeState extends State<Home> {
           ),
           itemCount: dataList.length,
           itemBuilder: (context, index) {
-            return Image.network(
-              dataList[index]['url'],
+            log("dataList: ${dataList[index]['url']}");
+            return CachedNetworkImage(
+              imageUrl: dataList[index]['url'],
               fit: BoxFit.cover,
-              loadingBuilder: (context, child, loadingProgress) {
-                if (loadingProgress == null) return child;
-                return Center(child: CircularProgressIndicator());
-              },
-              errorBuilder: (context, error, stackTrace) {
-                return Icon(Icons.error);
-              },
+              placeholder:
+                  (context, url) => Center(child: CircularProgressIndicator()),
+              errorWidget: (context, url, error) => Icon(Icons.error),
             );
+
+            // return Image.network(
+            //   dataList[index]['url'],
+            //   fit: BoxFit.cover,
+            //   loadingBuilder: (context, child, loadingProgress) {
+            //     if (loadingProgress == null) return child;
+            //     return Center(child: CircularProgressIndicator());
+            //   },
+            //   errorBuilder: (context, error, stackTrace) {
+            //     return Icon(Icons.error);
+            //   },
+            // );
           },
         ),
         // body: StreamBuilder<QuerySnapshot>(
