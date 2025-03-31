@@ -82,82 +82,84 @@ class _LoginScreenState extends State<LoginScreen> {
         child: Scaffold(
           body: Padding(
             padding: EdgeInsets.all(16.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Spacer(),
-                Center(child: FlutterLogo(size: 160)),
-                Text(
-                  'Login',
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 36),
-                ),
-                Text(
-                  'Please sign in to continue.',
-                  style: TextStyle(fontWeight: FontWeight.w300, fontSize: 18),
-                ),
-                SizedBox(height: 20),
-                TextField(
-                  controller: _emailController,
-                  keyboardType: TextInputType.emailAddress,
-                  decoration: InputDecoration(
-                    prefixIcon: Icon(Icons.mail),
-                    labelText: "EMAIL",
-                    enabledBorder: OutlineInputBorder(),
-                    focusedBorder: OutlineInputBorder(),
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(height: MediaQuery.of(context).size.height * 0.20),
+                  Center(child: FlutterLogo(size: 160)),
+                  Text(
+                    'Login',
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 36),
                   ),
-                ),
-                SizedBox(height: 16),
-                TextField(
-                  controller: _passwordController,
-                  obscureText: isHidePass,
-                  decoration: InputDecoration(
-                    prefixIcon: Icon(Icons.lock),
-                    suffix: GestureDetector(
-                      child: Icon(
-                        isHidePass ? Icons.visibility : Icons.visibility_off,
+                  Text(
+                    'Please sign in to continue.',
+                    style: TextStyle(fontWeight: FontWeight.w300, fontSize: 18),
+                  ),
+                  SizedBox(height: 20),
+                  TextField(
+                    controller: _emailController,
+                    keyboardType: TextInputType.emailAddress,
+                    decoration: InputDecoration(
+                      prefixIcon: Icon(Icons.mail),
+                      labelText: "EMAIL",
+                      enabledBorder: OutlineInputBorder(),
+                      focusedBorder: OutlineInputBorder(),
+                    ),
+                  ),
+                  SizedBox(height: 16),
+                  TextField(
+                    controller: _passwordController,
+                    obscureText: isHidePass,
+                    decoration: InputDecoration(
+                      prefixIcon: Icon(Icons.lock),
+                      suffix: GestureDetector(
+                        child: Icon(
+                          isHidePass ? Icons.visibility : Icons.visibility_off,
+                        ),
+                        onTap: () {
+                          isHidePass = !isHidePass;
+                          setState(() {});
+                          log('eye');
+                        },
                       ),
-                      onTap: () {
-                        isHidePass = !isHidePass;
-                        setState(() {});
-                        log('eye');
-                      },
+                      labelText: "PASSWORD",
+                      enabledBorder: OutlineInputBorder(),
+                      focusedBorder: OutlineInputBorder(),
                     ),
-                    labelText: "PASSWORD",
-                    enabledBorder: OutlineInputBorder(),
-                    focusedBorder: OutlineInputBorder(),
                   ),
-                ),
-                SizedBox(height: 20),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    ElevatedButton(
-                      onPressed: _signInWithEmailPassword,
-                      child: Text("Login"),
-                    ),
-                  ],
-                ),
-                Spacer(),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text("Don't have an account?"),
-                    TextButton(
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute<void>(
-                            builder:
-                                (BuildContext context) =>
-                                    const RegisterScreen(),
-                          ),
-                        );
-                      },
-                      child: Text("Sign up"),
-                    ),
-                  ],
-                ),
-              ],
+                  SizedBox(height: 20),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      ElevatedButton(
+                        onPressed: _signInWithEmailPassword,
+                        child: Text("Login"),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: MediaQuery.of(context).size.height * 0.15),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text("Don't have an account?"),
+                      TextButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute<void>(
+                              builder:
+                                  (BuildContext context) =>
+                                      const RegisterScreen(),
+                            ),
+                          );
+                        },
+                        child: Text("Sign up"),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
           ),
         ),
