@@ -118,13 +118,24 @@ class _ProfileState extends State<Profile> {
                               height: MediaQuery.of(context).size.width * 0.325,
                               child: Align(
                                 alignment: Alignment.bottomRight,
-                                child: IconButton(
-                                  onPressed: () {
-                                    isEditImage = !isEditImage;
-                                    log("$isEditImage");
-                                    setState(() {});
-                                  },
-                                  icon: Icon(Icons.photo),
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    color: const Color.fromARGB(
+                                      148,
+                                      210,
+                                      210,
+                                      210,
+                                    ),
+                                    borderRadius: BorderRadius.circular(360),
+                                  ),
+                                  child: IconButton(
+                                    onPressed: () {
+                                      isEditImage = !isEditImage;
+                                      log("$isEditImage");
+                                      setState(() {});
+                                    },
+                                    icon: Icon(Icons.photo),
+                                  ),
                                 ),
                               ),
                             ),
