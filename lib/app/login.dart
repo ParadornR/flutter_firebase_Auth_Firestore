@@ -19,7 +19,7 @@ class _LoginScreenState extends State<LoginScreen> {
   // final GoogleSignIn _googleSignIn = GoogleSignIn();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-
+  bool isHidePass = true;
   // Sign in with Email & Password
   Future<void> _signInWithEmailPassword() async {
     try {
@@ -109,12 +109,16 @@ class _LoginScreenState extends State<LoginScreen> {
                 SizedBox(height: 16),
                 TextField(
                   controller: _passwordController,
-                  obscureText: true,
+                  obscureText: isHidePass,
                   decoration: InputDecoration(
                     prefixIcon: Icon(Icons.lock),
                     suffix: GestureDetector(
-                      child: Icon(Icons.remove_red_eye),
+                      child: Icon(
+                        isHidePass ? Icons.visibility : Icons.visibility_off,
+                      ),
                       onTap: () {
+                        isHidePass = !isHidePass;
+                        setState(() {});
                         log('eye');
                       },
                     ),
